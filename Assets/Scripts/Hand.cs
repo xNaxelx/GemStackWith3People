@@ -11,17 +11,12 @@ public class Hand : MonoBehaviour
     private Camera _camera;
     private Vector3 _screenMousePosition = new Vector3();
     private Vector3 _InGameMousePosition = new Vector3();
-    public float _onMousePress ;
-
-    private void Update()
-    {
-        
-    }
+    private float _onMousePress ;
 
     private void MoveHand()
     {
         _screenMousePosition = _input.Action_Map.TapPosition.ReadValue<Vector2>();
-        _screenMousePosition.z = 7; //расстояние от камеры до руки, пока хардкод, но нужно исправить
+        _screenMousePosition.z = 7; //расстояние от камеры до руки, пока хардкод, но нужно исправить(нет +_-)
         _InGameMousePosition = _camera.ScreenToWorldPoint(_screenMousePosition);
 
         _InGameMousePosition.y = gameObject.transform.position.y;
