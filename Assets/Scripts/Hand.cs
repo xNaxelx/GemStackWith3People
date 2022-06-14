@@ -7,10 +7,17 @@ public class Hand : MonoBehaviour
 {
     public bool isFinished = false;
     public LootStorage lootStorage;
+    public float moveLimitX;
     private Input_Controls _input;
     private Camera _camera;
     private Vector3 _screenMousePosition = new Vector3();
     private Vector3 _InGameMousePosition = new Vector3();
+    public float _onMousePress ;
+
+    private void Update()
+    {
+        
+    }
 
     private void MoveHand()
     {
@@ -21,7 +28,25 @@ public class Hand : MonoBehaviour
         _InGameMousePosition.y = gameObject.transform.position.y;
         _InGameMousePosition.z = gameObject.transform.position.z;
 
-        gameObject.transform.position = _InGameMousePosition;
+        _onMousePress = _input.Action_Map.Tap.ReadValue<float>();
+
+        if (_onMousePress > 0)
+        {
+            if (_InGameMousePosition.x < moveLimitX && _InGameMousePosition.x > -moveLimitX)
+            {
+                gameObject.transform.position = _InGameMousePosition;
+            }
+            else if (_InGameMousePosition.x < -moveLimitX)
+            {
+                gameObject.transform.position = new Vector3(-moveLimitX, gameObject.transform.position.y,
+                    gameObject.transform.position.z);
+            }
+            else if (_InGameMousePosition.x > moveLimitX)
+            {
+                gameObject.transform.position = new Vector3(moveLimitX, gameObject.transform.position.y,
+                    gameObject.transform.position.z);
+            }
+        }
     }
 
     public void Grab(GameObject Loot)
