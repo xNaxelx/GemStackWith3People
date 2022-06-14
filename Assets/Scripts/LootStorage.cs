@@ -8,19 +8,55 @@ public class LootStorage : ScriptableObject
     private Rigidbody[] _RBStorage;
     private uint _size;
     private uint _lootCount = 0;
+    private uint _lastElementNumber;
 
     public void SetLoot(GameObject Loot)
     {
         if (Loot.GetComponent<Loot>() == null) return;
         if (_lootCount >= _size) return;
 
-        _GOStorage[_lootCount] = Loot;
-        _RBStorage[_lootCount] = Loot.GetComponent<Rigidbody>(); 
-
-        _GOStorage[_lootCount].GetComponent<Loot>().numberInStorage = _lootCount;
-        _GOStorage[_lootCount].GetComponent<Loot>().isKeaped = true;
-
         _lootCount++;
+        _lastElementNumber = _lootCount - 1;
+
+        _GOStorage[_lastElementNumber] = Loot;
+        _RBStorage[_lastElementNumber] = Loot.GetComponent<Rigidbody>(); 
+
+        _GOStorage[_lastElementNumber].GetComponent<Loot>().numberInStorage = _lastElementNumber;
+        _GOStorage[_lastElementNumber].GetComponent<Loot>().isKeaped = true;        
+    }
+    
+    public void CompressElements() // сдвигает элементы к началу, смещ€€ элементы на место null'ов
+    {
+        uint Searcher(uint iterator) 
+        {
+            iterator++;
+            if (_GOStorage[iterator] != null)
+            {
+                return iterator;
+            }
+            else
+            {
+                return Searcher(iterator);
+            }
+        }
+
+        for(uint i = 0; i < _lootCount; i++)
+        {
+            if(_GOStorage[i] == null)
+            {
+                uint s = Searcher(i);
+                _GOStorage[i] = _GOStorage[s];
+                _RBStorage[i] = _RBStorage[s];
+
+                _GOStorage[s] = null;
+                _RBStorage[s] = null;
+            }
+
+            if(i + 1 == _lootCount)
+            {
+                _lastElementNumber = i;
+            }
+        }
     }
     
     /*public void LoseLoot(uint numberInMassive)
@@ -63,16 +99,23 @@ public class LootStorage : ScriptableObject
     {
         return _lootCount;
     }
+    
+    public uint GetLastElementNumber()
+    {
+        return _lastElementNumber;
+    }
+
+    public void LoseElement(uint numberInStorage) // использовать в св€зке с CompressElements()!!!
+    {
+        _GOStorage[numberInStorage] = null;
+        _RBStorage[numberInStorage] = null;
+        _lootCount--;
+    }
 
     public LootStorage(uint size)
     {
         _GOStorage = new GameObject[size];
         _RBStorage = new Rigidbody[size];
         _size = size;
-    }
-
-    ~LootStorage()
-    {
-
     }
 }

@@ -37,11 +37,11 @@ public class Loot : MonoBehaviour
         }
     }
 
-    /*public void TossTrap()
+    public void TossTrap()
     {
         _rb.AddForce(Random.Range(0.5f, 2f), Random.Range(1f, 2.5f), Random.Range(-0.5f, 0.5f), ForceMode.VelocityChange);
-        hand.GetComponent<Hand>().lootStorage.LoseLoot(numberInStorage);
-    }*/
+        isKeaped = false;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
