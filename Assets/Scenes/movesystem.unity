@@ -331,7 +331,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 363744657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e35db6f7dec854c9acb1beb1b3a3f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b9a262bf3b82d84d9a5ac500eadda21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &363744659
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 378027693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e35db6f7dec854c9acb1beb1b3a3f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b9a262bf3b82d84d9a5ac500eadda21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &378027695
@@ -1814,9 +1814,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1252863153}
-  - component: {fileID: 1252863154}
   - component: {fileID: 1252863155}
   - component: {fileID: 1252863156}
+  - component: {fileID: 1252863154}
   - component: {fileID: 1252863157}
   m_Layer: 0
   m_Name: Player
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 553106524}
-  _baseSpeed: 2.4
+  _baseSpeed: 2.3
   _decFactor: 50
 --- !u!1001 &1404678111
 PrefabInstance:

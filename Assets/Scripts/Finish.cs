@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 public class Finish : MonoBehaviour
@@ -21,6 +22,7 @@ public class Finish : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player>().IsFinished = true;
             Debug.Log("Your getted valuse: " + gettedValuse);
+            ScoreManager.GetInstance().ChangePlayerBalance((int)gettedValuse);
         }
     }
 }

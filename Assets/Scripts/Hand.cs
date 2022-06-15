@@ -1,26 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
     public bool isFinished = false;
     public LootStorage lootStorage;
+    public float moveLimitX;
     private Input_Controls _input;
     private Camera _camera;
     private Vector3 _screenMousePosition = new Vector3();
     private Vector3 _InGameMousePosition = new Vector3();
+    private float _onMousePress ;
 
     private void MoveHand()
     {
         _screenMousePosition = _input.Action_Map.TapPosition.ReadValue<Vector2>();
-        _screenMousePosition.z = 7; //расстояние от камеры до руки, пока хардкод, но нужно исправить
+        _screenMousePosition.z = 7; //Г°Г Г±Г±ГІГ®ГїГ­ГЁГҐ Г®ГІ ГЄГ Г¬ГҐГ°Г» Г¤Г® Г°ГіГЄГЁ, ГЇГ®ГЄГ  ГµГ Г°Г¤ГЄГ®Г¤, Г­Г® Г­ГіГ¦Г­Г® ГЁГ±ГЇГ°Г ГўГЁГІГј(Г­ГҐГІ +_-)
         _InGameMousePosition = _camera.ScreenToWorldPoint(_screenMousePosition);
 
         _InGameMousePosition.y = gameObject.transform.position.y;
         _InGameMousePosition.z = gameObject.transform.position.z;
 
-        gameObject.transform.position = _InGameMousePosition;
+        _onMousePress = _input.Action_Map.Tap.ReadValue<float>();
+
+        if (_onMousePress > 0)
+        {
+            if (_InGameMousePosition.x < moveLimitX && _InGameMousePosition.x > -moveLimitX)
+            {
+                gameObject.transform.position = _InGameMousePosition;
+            }
+            else if (_InGameMousePosition.x < -moveLimitX)
+            {
+                gameObject.transform.position = new Vector3(-moveLimitX, gameObject.transform.position.y,
+                    gameObject.transform.position.z);
+            }
+            else if (_InGameMousePosition.x > moveLimitX)
+            {
+                gameObject.transform.position = new Vector3(moveLimitX, gameObject.transform.position.y,
+                    gameObject.transform.position.z);
+            }
+        }
     }
 
     public void Grab(GameObject Loot)
@@ -35,6 +56,7 @@ public class Hand : MonoBehaviour
         lootStorage.SetLoot(Loot);
 
         Loot.GetComponent<Loot>().hand = gameObject;
+        ScoreManager.GetInstance().IndicateScoreChange(Loot.transform.position,(int)Loot.GetComponent<Loot>().cost,true);
     }
 
     private void MoveStone()
@@ -86,7 +108,7 @@ public class Hand : MonoBehaviour
         else
         {
             _InGameMousePosition.x = 0;
-            _InGameMousePosition.z = gameObject.transform.position.z; // если этой строки не будет, рука зависает в одном месте
+            _InGameMousePosition.z = gameObject.transform.position.z; // ГҐГ±Г«ГЁ ГЅГІГ®Г© Г±ГІГ°Г®ГЄГЁ Г­ГҐ ГЎГіГ¤ГҐГІ, Г°ГіГЄГ  Г§Г ГўГЁГ±Г ГҐГІ Гў Г®Г¤Г­Г®Г¬ Г¬ГҐГ±ГІГҐ
             gameObject.transform.position = _InGameMousePosition;
         }
         MoveStone();
