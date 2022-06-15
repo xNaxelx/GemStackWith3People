@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]public float speed = 1;
+    public float speed = 0;
     [HideInInspector]public bool IsFinished = false;
     private Input_Controls _input;
     private bool _isGameStart = false;
@@ -19,8 +19,14 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _input = new Input_Controls();
-        _input.Action_Map.Tap.performed += context => _isGameStart = true;
-
+        _input.Action_Map.Tap.performed += context =>
+        {
+            if (_isGameStart == false)
+            {
+                StartCoroutine(this.GetComponent<MoveScript>().Braking());
+            }
+            _isGameStart = true;
+        };
         _positionBuffer = gameObject.transform.position;
     }
 
@@ -36,7 +42,7 @@ public class Player : MonoBehaviour
     
     void FixedUpdate()
     {
-        if(_isGameStart)
+        if (_isGameStart)
         {
             if(IsFinished == false)
             {
