@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
@@ -60,6 +61,7 @@ public class Hand : MonoBehaviour
         lootStorage.SetLoot(Loot);
 
         Loot.GetComponent<Loot>().hand = gameObject;
+        ScoreManager.GetInstance().IndicateScoreChange(Loot.transform.position,(int)Loot.GetComponent<Loot>().cost,true);
     }
 
     private void MoveStone()
