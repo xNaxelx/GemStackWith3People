@@ -16,6 +16,14 @@ public class Finish : MonoBehaviour
         {
             collision.gameObject.GetComponent<Hand>().isFinished = true;
             //сюда вставить после решения бага, отредактированный под подсчёт денег код ловушки
+
+            // Для демонстрации работы баланса игрока
+            LootStorage storage = collision.gameObject.GetComponent<Hand>().lootStorage;
+            for (int i = 0; i < storage.GetLootCount(); i++)
+            {
+                gettedValuse += storage.GetLootGO((uint)i).GetComponent<Loot>().cost;
+            }
+
         }
 
         if (collision.gameObject.GetComponent<Player>() != null)

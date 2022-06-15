@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,9 @@ public class LootStorage : ScriptableObject
         _RBStorage[_lastElementNumber] = Loot.GetComponent<Rigidbody>(); 
 
         _GOStorage[_lastElementNumber].GetComponent<Loot>().numberInStorage = _lastElementNumber;
-        _GOStorage[_lastElementNumber].GetComponent<Loot>().isKeaped = true;        
+        _GOStorage[_lastElementNumber].GetComponent<Loot>().isKeaped = true;
+
+        ScoreManager.GetInstance().IndicateScoreChange(Loot.transform.position, (int)Loot.GetComponent<Loot>().cost, true);
     }
     
     public void CompressElements() // сдвигает элементы к началу, смещ€€ элементы на место null'ов
@@ -107,6 +110,9 @@ public class LootStorage : ScriptableObject
 
     public void LoseElement(uint numberInStorage) // использовать в св€зке с CompressElements()!!!
     {
+        Loot element = _GOStorage[numberInStorage].GetComponent<Loot>();
+        ScoreManager.GetInstance().IndicateScoreChange(element.gameObject.transform.position, -(int)element.cost);
+
         _GOStorage[numberInStorage] = null;
         _RBStorage[numberInStorage] = null;
         _lootCount--;

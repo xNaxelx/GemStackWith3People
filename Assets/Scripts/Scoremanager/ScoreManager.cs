@@ -15,7 +15,7 @@ namespace Assets.Scripts
         private PlayerBalance _playerBalance;
         private List<PriceIndicator> _indicators;
         private int _score  = 0;
-        private bool initDone;
+        private bool _initDone;
 
         private void Awake()
         {
@@ -42,12 +42,12 @@ namespace Assets.Scripts
 
         private void Init()
         {
-            if(initDone) return;
+            if(_initDone) return;
             if (_priceIndicator == null) Debug.LogWarning("Score manager's price indicator object is not set, displaying disabled", _instance);
             if (_playerScoreText == null) Debug.LogWarning("Score manager's score text field is not set, displaying disabled", _instance);
             _indicators = new List<PriceIndicator>(10);
             _playerBalance = PlayerBalance.GetInstance();
-            initDone = true;
+            _initDone = true;
         }
         public void IndicateScoreChange(Vector3 position, int value, bool makeIndividual = false)
         {
