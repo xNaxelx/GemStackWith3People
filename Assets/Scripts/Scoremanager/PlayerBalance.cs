@@ -12,7 +12,7 @@ namespace Assets.Scripts
     /// </summary>
     class PlayerBalance
     {
-        public Action<int> BalanceChanged;
+        public Action<int> BalanceChanged = (a)=> { };
         private static string _dataKey = "playerBalance";
         private static PlayerBalance _instance;
         private int _balance;
@@ -44,7 +44,6 @@ namespace Assets.Scripts
 
         public void Save()
         {
-            Debug.Log("Player balance saved: "+_balance);
             DataManager.SaveData(_dataKey,_balance);
         }
     }
