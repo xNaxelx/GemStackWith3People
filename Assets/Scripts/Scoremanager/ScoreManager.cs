@@ -9,7 +9,7 @@ namespace Assets.Scripts
         [SerializeField] private PriceIndicator _priceIndicator;
         [SerializeField] private TMPro.TMP_Text _playerScoreText;
 
-        private const float MaxDistance = 4f;
+        private const float MaxDistance = 2f;
         private static ScoreManager _instance;
         
         private PlayerBalance _playerBalance;
@@ -31,7 +31,7 @@ namespace Assets.Scripts
             if (_instance == null)
             {
                 _instance = FindObjectOfType<ScoreManager>();
-                _instance.Init();
+                _instance?.Init();
             }
             if (_instance != null) return _instance;
 

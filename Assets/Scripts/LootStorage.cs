@@ -25,7 +25,7 @@ public class LootStorage : ScriptableObject
         _GOStorage[_lastElementNumber].GetComponent<Loot>().numberInStorage = _lastElementNumber;
         _GOStorage[_lastElementNumber].GetComponent<Loot>().isKeaped = true;
 
-        ScoreManager.GetInstance().IndicateScoreChange(Loot.transform.position, (int)Loot.GetComponent<Loot>().cost, true);
+        ScoreManager.GetInstance().IndicateScoreChange(Loot.transform.position, (int)Loot.GetComponent<Loot>().cost, false);
     }
     
     public void CompressElements() // сдвигает элементы к началу, смещ€€ элементы на место null'ов
