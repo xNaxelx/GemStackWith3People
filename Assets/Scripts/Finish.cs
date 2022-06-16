@@ -15,18 +15,16 @@ public class Finish : MonoBehaviour
         else if(collision.gameObject.GetComponent<Hand>() != null)
         {
             collision.gameObject.GetComponent<Hand>().isFinished = true;
-            //сюда вставить после решения бага, отредактированный под подсчёт денег код ловушки
-
-            // Here must be code to calculate player score for level
-            gettedValuse += 10;
-
+            for (uint c = collision.gameObject.GetComponent<Hand>().lootStorage.GetLootCount(), i = 0; i < c; i++)
+            {
+                gettedValuse += collision.gameObject.GetComponent<Hand>().lootStorage.GetLootGO(i).GetComponent<Loot>().cost;
+            }
+            ScoreManager.GetInstance().ChangePlayerBalance((int)gettedValuse);
         }
 
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             collision.gameObject.GetComponent<Player>().IsFinished = true;
-            Debug.Log("Your getted valuse: " + gettedValuse);
-            ScoreManager.GetInstance().ChangePlayerBalance((int)gettedValuse);
         }
     }
 }

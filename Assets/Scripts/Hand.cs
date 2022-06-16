@@ -56,7 +56,6 @@ public class Hand : MonoBehaviour
         lootStorage.SetLoot(Loot);
 
         Loot.GetComponent<Loot>().hand = gameObject;
-        ScoreManager.GetInstance().IndicateScoreChange(Loot.transform.position,(int)Loot.GetComponent<Loot>().cost,true);
     }
 
     private void MoveStone()

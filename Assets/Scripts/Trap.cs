@@ -12,11 +12,11 @@ public class Trap : MonoBehaviour
         {
             _ls = collision.gameObject.GetComponent<Loot>().hand.GetComponent<Hand>().lootStorage;
             victimNumberInStorage = collision.gameObject.GetComponent<Loot>().numberInStorage;
-
+            
             Destroy(_ls.GetLootGO(victimNumberInStorage));
             _ls.LoseElement(victimNumberInStorage);
 
-            if(victimNumberInStorage != _ls.GetLastElementNumber())
+            if (victimNumberInStorage != _ls.GetLastElementNumber())
             {
                 for(uint v = victimNumberInStorage + 1, l = _ls.GetLastElementNumber(); v <= l; v++)
                 {
