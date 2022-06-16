@@ -25,6 +25,7 @@ public class Trap : MonoBehaviour
                 }                
             }
             _ls.CompressElements();
+            StartCoroutine(MoveScript.instance.Discarding());
         }
     }
 }

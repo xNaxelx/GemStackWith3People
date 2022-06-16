@@ -23,9 +23,10 @@ public class Player : MonoBehaviour
         {
             if (_isGameStart == false)
             {
-                StartCoroutine(this.GetComponent<MoveScript>().Braking());
+                StartCoroutine(MoveScript.instance.Braking());
             }
             _isGameStart = true;
+
         };
         _positionBuffer = gameObject.transform.position;
     }

@@ -1223,7 +1223,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6401229633801620181, guid: 97fdb7b7fa4c61149a4304d0af49ae34, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6914462975839197308, guid: 97fdb7b7fa4c61149a4304d0af49ae34, type: 3}
       propertyPath: m_RootOrder
