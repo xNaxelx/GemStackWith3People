@@ -56,6 +56,7 @@ public class Hand : MonoBehaviour
         lootStorage.SetLoot(Loot);
 
         Loot.GetComponent<Loot>().hand = gameObject;
+        MoveScript.instance.ChangePlayerSpeed();
     }
 
     private void MoveStone()

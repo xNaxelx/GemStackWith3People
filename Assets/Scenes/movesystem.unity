@@ -2301,7 +2301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 553106524}
   _baseSpeed: 2.3
-  _decFactor: 50
+  _decFactor: 30
 --- !u!1 &1322439595
 GameObject:
   m_ObjectHideFlags: 0
