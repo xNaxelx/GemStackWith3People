@@ -16,6 +16,10 @@ public class Finish : MonoBehaviour
         {
             collision.gameObject.GetComponent<Hand>().isFinished = true;
             //сюда вставить после решения бага, отредактированный под подсчёт денег код ловушки
+
+            // Here must be code to calculate player score for level
+            gettedValuse += 10;
+
         }
 
         if (collision.gameObject.GetComponent<Player>() != null)
